@@ -1,0 +1,40 @@
+body {
+    height: 100%;
+    margin: 0%;
+}
+
+#chat-bottom {
+    padding-left : 25%;
+    padding-right: 25%;
+    background: white;
+}
+
+.panel-body {
+    overflow-y: scroll;
+    height: 85%;
+    width: 50%;
+    display: inline-block;
+    background: #243b55;
+}
+
+.list-group-item {
+    margin-bottom: 15px;
+    border: 1px solid #fff;
+}
+
+.query {
+    background: beige;
+}
+
+.response {
+    background: aliceblue;
+}
+
+.errspan {
+        float: right;
+        margin-right: 6px;
+        margin-top: -20px;
+        position: relative;
+        z-index: 2;
+        cursor: pointer;
+    }
