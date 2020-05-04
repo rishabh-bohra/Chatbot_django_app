@@ -1,8 +1,8 @@
 FROM centos
 RUN yum install python36 -y
 RUN yum install git -y
-#RUN yum install epel-release -y
-#RUN yum install python-pip -y
+RUN yum install epel-release -y
+RUN yum install python-pip -y
 RUN git clone https://github.com/rishabh-bohra/chatbot_django_app.git
 RUN easy_install-3.6 pip 
 RUN pip3 install -r ./chatbot_django_app/chat_app/requirements.txt
