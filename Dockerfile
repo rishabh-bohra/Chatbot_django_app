@@ -5,7 +5,8 @@ RUN yum install git -y
 #RUN yum repolist
 #RUN yum install python-pip -y
 RUN git clone https://github.com/rishabh-bohra/chatbot_django_app.git
-RUN easy_install-3.6 pip 
+#RUN easy_install-3.6 pip 
+RUN python3 ./chatbot_django_app/get-pip.py
 RUN pip3 install -r ./chatbot_django_app/chat_app/requirements.txt
 RUN pip3 install bs4
 EXPOSE 8000
