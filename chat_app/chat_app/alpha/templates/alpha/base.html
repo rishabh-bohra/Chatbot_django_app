@@ -1,0 +1,65 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css" type="text/css" media="all" />
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+    <link rel="shortcut icon" href="{% static 'images/logomarkv2.ico' %}">
+    <title>{% block title %}{% endblock %}</title>
+  </head>
+  <body style="font-family: 'Poppins', sans-serif;">
+    {% include 'alpha/navbar.html' %}
+
+    <div class="container-fluid">
+      {% include 'alpha/message.html' %}
+      {% if pnr_details %}
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <a href="{% url 'home' %}">
+              <button class="btn btn-success" style="margin-bottom: 10px; border-radius: 0;">Go back to homepage</button>
+            </a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <table class="table table-bordered table-striped table-responsive">
+            <thead>
+              <tr style="color:blue">
+                <th>Name</th>
+                <th>Current-status</th>
+                <th>PNR</th>
+                <th>Train</th>
+                <th>From</th>
+                <th>To</th>
+                <th>On</th>
+                <th>Coach-Class</th>
+              </tr>
+            </thead>
+            <tbody>
+                <tr>
+                  <td>{{pnr_details.Name}}</td>
+                  <td>{{pnr_details.Current_status}}</td>
+                  <td>{{pnr_details.PNR}}</td>
+                  <td>{{pnr_details.Train}}</td>
+                  <td>{{pnr_details.From}}</td>
+                  <td>{{pnr_details.To}}</td>
+                  <td>{{pnr_details.On}}</td>
+                  <td>{{pnr_details.Coach_Class}}</td>
+                </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      {% endif %}
+    </div>
+
+  </body>
+</html>

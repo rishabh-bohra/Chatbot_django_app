@@ -1,0 +1,89 @@
+{% load staticfiles %}
+
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Django ChatBot</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="{% static 'css/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'chat.css' %}">
+
+    <!-- jQuery library -->
+    <script type="text/javascript" src="{% static 'js/js/jquery-3.2.1.min.js' %}"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="{% static 'js/js/bootstrap.min.js' %}"></script>
+</head>
+
+<body>
+    <div id="chat-body" class="panel panel-default">
+        <div class="panel-heading" style="text-align:center"><strong>Railway SmartBot</strong></div>
+        <div style="text-align:center" >
+        <div id="msg-list-div" class="panel-body">
+            <ul id="msg-list" class="list-group">
+                <li class="text-left response list-group-item">Welcome! What should I call you?</li>
+                <script>
+                    var chatlist = document.getElementById('msg-list-div');
+                    chatlist.scrollTop = chatlist.scrollHeight;
+                </script>
+            </ul>
+        </div>
+
+        <form id="chat-form" method="post" action="/post/">
+        <div id="chat-bottom" class="input-group">
+            <input type="text" x-webkit-speech="x-webkit-speech" placeholder="Enter your message" id="chat-msg" name="chat-msg" class="form-control" style="background:lightgray"/>
+            <i class="fa fa-microphone errspan" id="errspan"></i>
+
+            
+            <span class="input-group-btn">
+
+                <input class="btn btn-danger" id="send" type="submit" value="Send"/>
+            </span>
+        </div>
+        </form>
+            </div>
+    </div>
+
+
+</body>
+
+<script src="{% static 'chat.js' %}"></script>
+<script>
+    window.SpeechRecognition = window.webkitSpeechRecognition || window.SpeechRecognition;
+    let finalTranscript = '';
+    let recognition = new window.SpeechRecognition();
+
+    recognition.interimResults = true;
+    recognition.maxAlternatives = 10;
+    recognition.continuous = true;
+
+    recognition.onresult = (event) => {
+      let interimTranscript = '';
+      for (let i = event.resultIndex, len = event.results.length; i < len; i++) {
+        let transcript = event.results[i][0].transcript;
+        if (event.results[i].isFinal) {
+          finalTranscript += transcript;
+        } else {
+          interimTranscript += transcript;
+        }
+      }
+
+      document.getElementById("chat-msg").value = finalTranscript + interimTranscript ;
+       $('#send').removeAttr('disabled');
+    }
+    document.getElementById("errspan").onclick = function() {
+    recognition.start();
+    console.log('Ready to receive a color command.');
+}
+recognition.onspeechend = function() {
+  recognition.stop();
+  document.getElementById("send").click()
+  console.log('Speech recognition has stopped.');
+}
+</script>
+
+</html>
+</html>
