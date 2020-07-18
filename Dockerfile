@@ -2,8 +2,6 @@ FROM centos
 
 ARG user=ris
 ARG group=ris
-ARG uid=1000
-ARG gid=1000
 
 RUN groupadd  ${group} \
     && useradd -g ${group} -s /bin/bash  ${user}
